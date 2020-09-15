@@ -1,0 +1,30 @@
+#!/bin/bash
+echo "installing imtapps custom dotfiles"
+
+DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+
+symlink_file_in_home () {
+    FILE=$1
+    mkdir -p $(dirname "$HOME/$FILE")
+    if [[ -f "$HOME/$FILE" && ! -L "$HOME/$FILE" ]]; then
+        NOW=`date +"%F-%T"`
+        RENAMED_FILE="${HOME}/${FILE}.${NOW}"
+        echo "${HOME}/${FILE} exists - renaming to ${RENAMED_FILE}"
+        mv "${HOME}/${FILE}" "${RENAMED_FILE}"
+    fi
+    ln -sf "${DIR}/${FILE}" "${HOME}/${FILE}"
+}
+
+symlink_file_in_home ".pip/pip.conf"
+symlink_file_in_home ".config/flake8"
+symlink_file_in_home ".ssh/authorized_keys"
+symlink_file_in_home ".ssh/config"
+symlink_file_in_home ".git-templates/hooks/commit-msg"
+git config --global init.templatedir '~/.git-templates'
+
+for repo in `find ~/Projects -maxdepth 2 -name .git`
+do
+    PROJECT=$(dirname $repo)
+    git -C $PROJECT init
+done
+echo "Git commit message validation has been installed"

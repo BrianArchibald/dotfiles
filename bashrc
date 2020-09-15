@@ -48,3 +48,10 @@ alias ls='ls --color'
 # Empty the trash folder that is created when you delete things as root
 alias root_trash='sudo bash -c "exec rm -r /root/.local/share/Trash/{files,info}/*"'
 export PATH='/usr/local/bin:/usr/local/Cellar/pyenv-virtualenv/1.1.3/shims:/Users/brianarchibald/.pyenv/shims:/Users/brianarchibald/.pyenv/shims:~/.pyenv/shims:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/Cellar/pyenv-virtualenv/1.1.3/shims:/Users/brianarchibald/.pyenv/shims:~/.pyenv/shims'\n
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

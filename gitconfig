@@ -18,3 +18,5 @@
     publish = "!git push origin $(git branch-name)"
     pull-rebase = "!git pull origin $(git branch-name) --rebase"
     pul = "!git pull origin $(git branch-name)"
+[init]
+	templatedir = ~/.git-templates
